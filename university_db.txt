@@ -5,15 +5,27 @@ FROM `students`
 WHERE `date_of_birth` >= "1990-01-01"
 AND `date_of_birth` <= "1990-12-31"
 ORDER BY `date_of_birth` ASC
+o
+SELECT *
+FROM `students`
+WHERE YEAR(`date_of_birth`) = 1990
+ORDER BY `date_of_birth` ASC
 
 2. Selezionare tutti i corsi che valgono più di 10 crediti (479)
 
 SELECT *
 FROM `courses`
 WHERE `cfu` > 10
+ORDER BY `cfu` ASC
 
 3. Selezionare tutti gli studenti che hanno più di 30 anni
 
+SELECT * 
+FROM `students` 
+WHERE TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30 
+ORDER BY `date_of_birth` ASC;
+o
+SBAGLITA (PRENDE SOLO FINO AL 31/12/2022)
 SELECT *
 FROM `students`
 WHERE (YEAR(NOW()) - YEAR(`date_of_birth`)) > 30;
@@ -32,7 +44,13 @@ AND `year` = 1
 SELECT *
 FROM `exams`
 WHERE DATE_FORMAT(`date`, '%Y-%m-%d') = "2020-06-20"
-AND `hour` > "14:00:00"
+AND `hour` >= "14:00:00"
+o
+SELECT *
+FROM `exams`
+WHERE `date` = "2020-06-20"
+AND HOUR(`hour`) >= "14:00:00"
+
 
 6. Selezionare tutti i corsi di laurea magistrale (38)
 
